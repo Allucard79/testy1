@@ -12,7 +12,7 @@ describe('formatDate', () => {
         });
 
         it('should return 0 seconds if no value is passed', () => {
-            const actual = formatDate();
+            const actual = formatDate(null);
     
             const expected = '0s';
     
@@ -83,6 +83,16 @@ describe('formatDate', () => {
             const actual = formatDate('10815');
 
             const expected = '3h 15s';
+
+            assert.equal(actual, expected);
+        });
+    });
+    
+    describe('value that is not a number', () => {
+        it('value is not a number', () => {
+            const actual = formatDate('abcd');
+        
+            const expected = 'value that is not a number';
 
             assert.equal(actual, expected);
         });
