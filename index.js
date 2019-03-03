@@ -4,6 +4,9 @@ const formatDate = timeInSeconds => {
     const seconds = Math.floor(timeInSeconds % 3600 % 60);
   
     let time;
+    
+    if(isNaN(timeInSeconds ) || timeInSeconds === undefined)
+      return 'value that is not a number';
   
     if (hours < 1 && minutes < 1) {
       time = `${seconds}s`;
