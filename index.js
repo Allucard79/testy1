@@ -1,32 +1,11 @@
 const formatDate = timeInSeconds => {
-    const hours = Math.floor(timeInSeconds / 3600);
-    const minutes = Math.floor(timeInSeconds % 3600 / 60);
-    const seconds = Math.floor(timeInSeconds % 3600 % 60);
-  
-    let time;
-    
-    if(isNaN(timeInSeconds ) || timeInSeconds === undefined)
-      return 'value that is not a number';
-  
-    if (hours < 1 && minutes < 1) {
-      time = `${seconds}s`;
-    } else if (timeInSeconds == undefined) {
-      time = `0s`;
-    } else if (hours < 1 && (seconds % 60 !== 0)) {
-      time = `${minutes}m ${seconds}s`;
-    } else if (hours < 1 && (seconds % 60 === 0)) {
-      time = `${minutes}m`;
-    } else if (hours > 0 && (minutes % 60 !== 0) && (seconds % 60 !== 0)) {
-      time = `${hours}h ${minutes}m ${seconds}s`;
-    } else if (hours > 0 && (minutes % 60 === 0) && (seconds % 60 === 0)) {
-      time = `${hours}h`;
-    } else if (hours > 0 && (minutes % 60 !== 0) && (seconds % 60 === 0)) {
-      time = `${hours}h ${minutes}m`;
-    } else {
-      time = `${hours}h ${seconds}s`;
-    }
-  
-    return `${time}`;
-  }
-  
-  module.exports = formatDate;
+  if (isNaN(timeInSeconds)) timeInSeconds = 0;
+  const uptime = timeInSeconds;
+  const hours = Math.floor((uptime / 60) / 60);
+  const minutes = Math.floor((uptime / 60) - (hours * 60));
+  const seconds = Math.floor(uptime - ((minutes * 60) + ((hours * 60) * 60)));
+  const time = `${hours === 0 ? '' : hours +'h '}${minutes === 0 ? '' : minutes + 'm '}${hours !== 0 && seconds === 0 || minutes !== 0 && seconds === 0 ? '' : seconds + 's'}`
+  return `${time.trim()}` ;
+}
+
+module.exports = formatDate;
