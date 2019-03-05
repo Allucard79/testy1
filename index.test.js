@@ -87,14 +87,4 @@ describe('formatDate', () => {
             assert.equal(actual, expected);
         });
     });
-    
-    describe('value that is not a number', () => {
-        it('value is not a number', () => {
-            const actual = formatDate('abcd');
-        
-            const expected = 'value that is not a number';
-
-            assert.equal(actual, expected);
-        });
-    });
 });
